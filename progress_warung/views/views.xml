@@ -1,0 +1,77 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="progress_komponen_tree_view">
+			<field name="name">Progress Komponen</field>
+			<field name="model">progress.komponen</field>
+			<field name="arch" type="xml">
+				<tree string="Progress Komponen">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="progress_komponen_form_view">
+			<field name="name">Progress Komponen Form</field>
+			<field name="model">progress.komponen</field>
+			<field name="arch" type="xml">
+				<form string="Work Description">
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+							</group>
+							<group>
+							</group>
+						</group>
+						<notebook>
+							<page string="Progress">
+								<field name="progress_line">
+									<tree string="Detail Lines" editable="bottom">
+										<field name="item_id"/>
+										<field name="komponen_id"/>
+										<field name="weight"/>
+										<field name="mulai_pengerjaan"/>
+										<field name="tanggal_ekspektasi"/>
+										<field name="hari_pengerjaan"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="komponen_list_action">
+			<field name="name">Komponen</field>
+			<field name="res_model">progress.komponen</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Buatlah Progress pertamamu ...</p>
+			</field>
+		</record>
+		
+		<record id="seq_progress" model="ir.sequence">
+				<field name="name">Progress Hari</field>
+				<field name="code">progress.hari</field>
+				<field name="prefix">PROG/</field>
+				<field name="suffix">/%(month)s/%(year)s</field>
+				<field name="padding">6</field>
+				<field eval="1" name="number_increment"/>
+			</record>
+
+		<menuitem id="progress_warung_pintar" name="Progress"/>
+
+		<menuitem id="komponen_progress_warung_pintar" name="Komponen" parent="progress_warung_pintar"/>
+
+		<menuitem id="komponen_menu" name="Komponen" parent="komponen_progress_warung_pintar" action="komponen_list_action"/>
+
+	</data>
+</odoo>
+
+
+
+
+
+
